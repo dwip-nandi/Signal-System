@@ -1,0 +1,59 @@
+% check a functio is liniar or not
+% Parameters
+f1 = 1; % Frequency of x1 in Hz
+f2 = 3; % Frequency of x2 in Hz
+fs = 100; % Sampling frequency in Hz
+t = 0:1/fs:1; % Time vector from 0 to 1 second with step size 1/fs
+
+% Generate discrete-time signals
+x1 = sin(2*pi*f1*t);
+x2 = sin(2*pi*f2*t);
+
+% System function
+y1 = -(x1 / 2);
+y2 = -(x2 / 2);
+
+% Check linearity
+x_combined = x1 + x2;
+y_combined = -(x_combined / 2);
+
+% Output results
+disp('y1:');
+disp(y1);
+disp('y2:');
+disp(y2);
+disp('y_combined:');
+disp(y_combined);
+
+% Check if y_combined is equal to y1 + y2
+if isequal(y_combined, y1 + y2)
+    disp('The system is linear.');
+else
+    disp('The system is not linear.');
+end
+
+% Plot the signals
+figure;
+subplot(2,1,1);
+plot(t, x1);
+title('x1 = sin(2\pi f1 t)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+subplot(2,1,2);
+plot(t, x2);
+title('x2 = sin(2\pi f2 t)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+figure;
+plot(t, y_combined);
+title('y\_combined = -(x\_combined / 2)');
+xlabel('Time (s)');
+ylabel('Amplitude');
+
+figure;
+plot(y1+y2);
+title('Check Liniarity');
+xlabel('Time');
+ylabel('Amplitude');
