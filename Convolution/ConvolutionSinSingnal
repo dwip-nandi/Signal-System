@@ -1,0 +1,49 @@
+clc; close all; clear;
+n=0:6;
+x=sin(n);
+% display input signal
+disp('Input Signal');
+disp(x);
+
+n=0:4;
+h=ones(1,length(n));
+%display inpulse signal
+disp('Inpulse Signal');
+disp(h);
+
+N = length(x)+length(h)-1;
+
+y=zeros(1,N);
+
+%perform the convolution
+for i=1:N
+    for j =1:length(x)
+        if(i-j+1>=1)&&(i-j+1<=length(h))
+            y(i)=y(i)+x(j)*h(i-j+1);
+        end
+    end
+end
+
+disp('Output Signal');
+disp(y);
+
+n=0:length(x)-1;
+figure(1);
+stem(n,x);
+title('Input Signal');
+xlabel('n');
+ylabel('x[n]');
+
+n=0:length(h)-1;
+figure(2);
+stem(n,h);
+title('Impulse signal');
+xlabel('n');
+ylabel('h[n]');
+
+n=0:length(y)-1;
+figure(3);
+stem(n,y);
+title('Output Signal');
+xlabel('n');
+ylabel('y[n]');
